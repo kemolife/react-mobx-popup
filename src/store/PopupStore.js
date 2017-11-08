@@ -1,10 +1,10 @@
 import { observable, computed, action } from "mobx";
 
 class PopupStore {
-    @observable id = 1;
+    id = 1;
     @observable popups = {};
     @observable list = [];
-    @observable active = null;
+    active = null;
     @observable plugins = {};
 
     @action

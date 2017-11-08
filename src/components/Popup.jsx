@@ -5,48 +5,57 @@ import PopupContent from "./PopupContent";
 import PopupFooter from "./PopupFooter";
 
 const propTypes = {
+    id: PropTypes.string,
     className: PropTypes.string.isRequired,
-    btnClass: PropTypes.string.isRequired,
-    closeBtn: PropTypes.bool,
-    closeHtml: PropTypes.string,
-    defaultOk: PropTypes.string,
-    defaultCancel: PropTypes.string,
-    wildClasses: PropTypes.bool,
+    title: PropTypes.string,
+    buttons: PropTypes.object,
+    content: PropTypes.string,
+    visible: PropTypes.bool,
+    position: PropTypes.object,
     closeOnOutsideClick: PropTypes.bool,
 };
 
 const defaultProps = {
     id: 'popup',
+    title: null,
+    buttons: {},
+    content: null,
+    visible: false,
     className: 'popup',
-    btnClass: 'popup__btn',
-    closeBtn: true,
-    closeHtml: null,
-    defaultOk: 'Ok',
-    defaultCancel: 'Cancel',
-    wildClasses: false,
+    noOverlay: false,
+    position: {},
     closeOnOutsideClick: true,
 };
 
 @observer
 class Popup extends React.Component {
 
-    constructor(props)
-    {
+    constructor(props) {
         super(props);
-        const {title, content} = props.store;
+        this.state = {
+            id: 'id' in props.store ? props.store.id : props.id,
+            title: 'title' in props.store ? props.store.title : props.title,
+            className: 'className' in props.store ? props.store.className : props.className,
+            buttons: props.store.buttons ? props.store.buttons : props.buttons,
+            content: props.store.content ? props.store.content : props.content,
+            visible: props.store.visible ? props.store.visible : props.visible,
+            noOverlay: props.store.noOverlay ? props.store.noOverlay : props.noOverlay,
+            position: props.store.position ? props.store.position : props.position,
+            closeOnOutsideClick: props.store.closeOnOutsideClick ? props.store.closeOnOutsideClick : props.position,
+        }
     }
 
     className(className) {
-        return `${this.props.className}__${className}`;
+        return `${this.state.className}__${className}`;
     }
 
     render() {
         return (
-            <div id={this.props.id} className={"modal fade "+this.className('popup')} role="dialog">
-                <div className={"modal-dialog "+this.className('dialog')}>
-                    <div className={"modal-content "+this.className('content')}>
-                        <PopupHeader title={title} className={this.className('header')}/>
-                        <PopupContent />
+            <div id={this.state.id} className={"modal " + this.className('popup')} style={{display: "block"}}>
+                <div className={"modal-dialog " + this.className('dialog')}>
+                    <div className={"modal-content " + this.className('content')}>
+                        <PopupHeader title={this.state.title} className={this.className('header')}/>
+                        <PopupContent content = {this.state.content}/>
                         <PopupFooter className={this.className('footer')}/>
                     </div>
                 </div>

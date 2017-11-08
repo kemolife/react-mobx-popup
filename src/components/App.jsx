@@ -4,7 +4,7 @@ import store from "../store/PopupStore";
 
 let mySpecialPopup = store.register({
     title: 'I am special',
-    content: 'Since I am special you might need me again later. Save me!',
+    content: <h2>xxx</h2>,
     buttons: {
         left: ['cancel'],
         right: ['ok']
@@ -29,8 +29,8 @@ export default class App extends React.Component
     render(){
         return (
             <div>
-                <button type="button" className="btn btn-info btn-lg" data-toggle="modal" data-target="#popup" onClick={this.openPopup}>Popup</button>
-                {this.state.showPopup?<Popup store={store.getDataPopup(mySpecialPopup)} />:null}
+                <button type="button" className="btn btn-info btn-lg" onClick={this.openPopup}>Popup</button>
+                {this.state.showPopup?<Popup store = {store.getDataPopup(mySpecialPopup)} />:null}
             </div>
         )
     }
