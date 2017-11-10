@@ -1,37 +1,32 @@
 import { observable, computed, action } from "mobx";
 
 class PopupStore {
-    id = 1;
+    @observable id = 1;
     @observable popups = {};
     @observable list = [];
-    active = null;
+    @observable active = null;
     @observable plugins = {};
 
-    @action
-    getId()
+    @computed get ids()
     {
         return 'id_' + (this.id++);
     }
 
-    @action
-    getActivePopup()
+    @computed get ActivePopup()
     {
         return this.popups[this.active];
     }
 
-    @action
-    getDataPopup(id)
+    @action getDataPopup(id)
     {
       return this.popups[id];
     }
 
-    @action
-    clearQueue() {
-        this.queue = [];
+    @action clearQueue() {
+        this.queue.replace([]);
     }
 
-    @action
-    queue(id) {
+    @action queue(id) {
         if (!Object.prototype.hasOwnProperty.call(this.popups, id)) {
             return false;
         }
@@ -42,17 +37,15 @@ class PopupStore {
         return id;
     }
 
-    @action
-    register(data) {
-        const id = this.getId();
+    @action register(data) {
+        const id = this.ids;
 
         this.popups[id] = Object.assign({}, data);
 
         return id;
     }
 
-    @action
-    create(data, bringToFront) {
+    @action create(data, bringToFront) {
         /** Register popup */
         const id = this.register(data);
 
@@ -71,8 +64,7 @@ class PopupStore {
         return id;
     }
 
-    @action
-    registerPlugin(name, callback) {
+    @action registerPlugin(name, callback) {
         this.plugins[name] = callback.bind(this);
     }
 }

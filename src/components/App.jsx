@@ -30,7 +30,7 @@ export default class App extends React.Component
         return (
             <div>
                 <button type="button" className="btn btn-info btn-lg" onClick={this.openPopup}>Popup</button>
-                {this.state.showPopup?<Popup store = {store.getDataPopup(mySpecialPopup)} />:null}
+                {this.state.showPopup?<Popup {...store.getDataPopup(mySpecialPopup)} />:null}
             </div>
         )
     }
