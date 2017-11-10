@@ -2,7 +2,7 @@ import { observable, computed, action } from "mobx";
 
 class PopupStore {
     @observable id = 1;
-    @observable popups = {};
+    @observable popups = [];
     @observable list = [];
     @observable active = null;
     @observable plugins = {};
@@ -37,12 +37,19 @@ class PopupStore {
         return id;
     }
 
-    @action register(data) {
+    addPopups(data){
         const id = this.ids;
+        this.popups.push(data);
+    }
 
-        this.popups[id] = Object.assign({}, data);
-
+    @action register(data) {
+        this.addPopups(data);
         return id;
+    }
+
+    @action show(data) {
+        this.addPopups(data);
+        return this.popups;
     }
 
     @action create(data, bringToFront) {
