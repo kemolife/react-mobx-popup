@@ -1,5 +1,5 @@
 import Popup from "./Popup";
-import storePopup from "../store/PopupStore";
+import storePopups from "../store/PopupStore";
 
 export default Popup;
-export {storePopup};
+export {storePopups};

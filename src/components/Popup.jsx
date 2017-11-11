@@ -27,7 +27,7 @@ const defaultProps = {
     closeOnOutsideClick: true,
 };
 
-@inject("myPopup") @observer
+@inject("storePopups") @observer
 class Popup extends React.Component {
 
     constructor(props) {
@@ -41,13 +41,13 @@ class Popup extends React.Component {
     render() {
         return (
             <div>
-                {this.props.myPopup.popups.map((popup, key) =>
+                {this.props.storePopups.popups.map((popup, key) =>
                     <div key={key} id={this.props.id} className={"modal " + this.className('popup')} style={
                         {
                             display: "block",
-                            "z-index": key * 10,
-                            "padding-top": key * 15,
-                            "background": key != 0 ? "rgba(0,0,0,0.3)" : ""
+                            zIndex: key * 10,
+                            paddingTop: key * 15,
+                            background: key != 0 ? "rgba(0,0,0,0.3)" : ""
                         }
                     }>
                         <div className={"modal-dialog " + this.className('dialog')}>

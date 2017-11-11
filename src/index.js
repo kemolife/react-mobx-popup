@@ -2,9 +2,10 @@ import React from "react";
 import {Provider} from "mobx-react";
 import {render} from "react-dom";
 import DevTools from "mobx-react-devtools";
-import Popup, {storePopup} from "./components";
+import Popup, {storePopups} from "./components";
+import Button from "./components/Button"
 
-storePopup.show({
+storePopups.show({
     title: 'I am special',
     className: 'xxxx',
     content: <h2>xxx</h2>,
@@ -14,36 +15,20 @@ storePopup.show({
     }
 });
 
-storePopup.show({
-    title: 'I am xxxx',
-    content: <h2>xxx</h2>,
+storePopups.show({
+    title: 'I am llll',
+    content: <Button />,
     buttons: {
         left: ['cancel'],
         right: ['ok']
     }
 });
 
-storePopup.show({
-    title: 'I am llll',
-    content: <h2>llllll</h2>,
-    buttons: {
-        left: ['cancel'],
-        right: ['ok']
-    }
-});
-storePopup.show({
-    title: 'I am xuy',
-    content: <h2>xuy</h2>,
-    buttons: {
-        left: ['cancel'],
-        right: ['ok']
-    }
-});
 
 render(
     <div>
         <DevTools/>
-        <Provider myPopup = {storePopup}>
+        <Provider storePopups = {storePopups}>
             <Popup />
         </Provider>
     </div>,
