@@ -1,28 +1,8 @@
 {
-  "name": "mobx-react-boilerplate",
+  "name": "react-mobx-popup",
   "version": "1.0.0",
-  "description": "Boilerplate for MobX + React project with JSX, ES6 and decorator compilation",
-  "scripts": {
-    "start": "webpack-dev-server --hot --open",
-    "lint": "eslint src"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/mobxjs/mobx-react-boilerplate.git"
-  },
-  "keywords": [
-    "react",
-    "reactjs",
-    "boilerplate",
-    "mobx",
-    "starter-kit"
-  ],
-  "author": "Michel Weststrate <mweststrate@gmail.com> (http://github.com/mweststrate)",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/mobxjs/mobx/issues"
-  },
-  "homepage": "http://mobxjs.github.com/mobx",
+  "description": "mobx-react-boilerplate =====================",
+  "main": "webpack.config.js",
   "devDependencies": {
     "babel-core": "^6.9.1",
     "babel-loader": "^7.1.2",
@@ -40,5 +20,19 @@
     "react": "^15.1.0",
     "react-dom": "^15.1.0",
     "react-prop-types": "*"
-  }
+  },
+  "scripts": {
+    "start": "webpack-dev-server --hot --open",
+    "lint": "eslint src"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kemolife/react-mobx-popup.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kemolife/react-mobx-popup/issues"
+  },
+  "homepage": "https://github.com/kemolife/react-mobx-popup#readme"
 }
