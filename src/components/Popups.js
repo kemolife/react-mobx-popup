@@ -20,7 +20,6 @@ storePopups.show({
 
 storePopups.show({
     title: 'I am llll',
-    className: 'xxx',
     content: <Button />,
     buttons: {
         left: ['cancel'],

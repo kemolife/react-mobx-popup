@@ -4,43 +4,51 @@ import PopupHeader from "./PopupHeader";
 import PopupContent from "./PopupContent";
 import PopupFooter from "./PopupFooter";
 
-const propTypes = {
-    id: PropTypes.string,
-    className: PropTypes.string.isRequired,
-    title: PropTypes.string,
-    buttons: PropTypes.object,
-    content: PropTypes.object,
-    visible: PropTypes.bool,
-    position: PropTypes.object,
-    show: PropTypes.func,
-    shown: PropTypes.func,
-    hide: PropTypes.func,
-    hidden: PropTypes.func,
-    closeOnOutsideClick: PropTypes.bool
-};
-
-const defaultProps = {
-    id: 'popup',
-    title: null,
-    buttons: {},
-    content: null,
-    visible: false,
-    className: 'popup',
-    noOverlay: false,
-    position: {},
-    closeOnOutsideClick: true,
-    show: function(){console.log('show')},
-    shown: () => console.log('shown'),
-    hide: () => console.log('hide'),
-    hidden: () => console.log('hidden')
-};
-
 @inject('storePopups') @observer
 class Popup extends React.Component {
+    static propTypes = {
+        id: PropTypes.string,
+        className: PropTypes.string.isRequired,
+        title: PropTypes.string,
+        buttons: PropTypes.object,
+        content: PropTypes.object,
+        visible: PropTypes.bool,
+        position: PropTypes.object,
+        show: PropTypes.func,
+        shown: PropTypes.func,
+        hide: PropTypes.func,
+        hidden: PropTypes.func,
+        closeOnOutsideClick: PropTypes.bool
+    };
+
+    static defaultProps = {
+        id: 'popup',
+        title: null,
+        buttons: {},
+        content: null,
+        visible: false,
+        className: 'popup',
+        noOverlay: false,
+        position: {},
+        closeOnOutsideClick: true,
+        show: () => console.log('show'),
+        shown: () => console.log('shown'),
+        hide: () => console.log('hide'),
+        hidden: () => console.log('hidden')
+    };
+
+    static hasClass(element, className){
+        if (element.classList) {
+            return !!className && element.classList.contains(className);
+        }
+
+        return (` ${element.className} `).indexOf(` ${className} `) > -1;
+    };
 
     constructor(props) {
         super(props);
-        this.handlerClose = this.handlerClose.bind(this)
+        this.handlerClose = this.handlerClose.bind(this);
+        this.closeOutside = this.closeOutside.bind(this);
     }
 
     componentWillMount() {
@@ -64,10 +72,16 @@ class Popup extends React.Component {
         return this.props.storePopups.closePopup();
     }
 
+    closeOutside(e){
+        if(this.props.closeOnOutsideClick && this.hasClass(e.target, this.className('popup'))) {
+            return this.handlerClose()
+        }
+    }
+
     render() {
         const key = this.props.keyPopup;
         return (
-            <div id={this.props.id} className={"modal " + this.className('popup')} style={
+            <div onClick={this.closeOutside} id={this.props.id} className={"modal " + this.className('popup')} style={
                 {
                     display: "block",
                     zIndex: key * 10,
@@ -87,6 +101,4 @@ class Popup extends React.Component {
     }
 }
 
-Popup.propTypes = propTypes;
-Popup.defaultProps = defaultProps;
 export default Popup;
