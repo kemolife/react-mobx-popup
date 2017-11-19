@@ -10,6 +10,11 @@ class Button extends React.Component {
     handlerOpen(){
         storePopups.show({
             title: 'I am new',
+            className: 'new',
+            id: 'new_id',
+            show: function () {
+
+            },
             content: <Button />,
             buttons: {
                 left: ['cancel'],
